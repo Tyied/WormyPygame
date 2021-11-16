@@ -6,14 +6,15 @@
 import random, pygame, sys
 from pygame.locals import *
 
-FPS = 20
-#FPS is the frames per second so increasing the overall 
-WINDOWWIDTH = 1800
-#how wide the game window is-DM
-WINDOWHEIGHT = 1000
-#how tall the game window is-DM
+FPS = 15
+#FPS is the frames per second so increasing the overall speed of our
+###Changed our FPS 15
+WINDOWWIDTH = 1200
+WINDOWHEIGHT = 800
+# These are the windows dimensions in which our snake, apple and functions will refer 
+###Changed our Window size
 CELLSIZE = 20
-
+#this accounts to the quantity of volume or surface area per cells(cellsize) (A.S)
 
 assert WINDOWWIDTH % CELLSIZE == 0, "Window width must be a multiple of cell size."
 
@@ -23,7 +24,7 @@ CELLWIDTH = int(WINDOWWIDTH / CELLSIZE)
 
 CELLHEIGHT = int(WINDOWHEIGHT / CELLSIZE)
 
-##This entire section is to initialize colours that can be referenced later on-DM
+#This entire section is to initialize colours that can be referenced later on-DM
 #             R    G    B
 WHITE     = (255, 255, 255)
 BLACK     = (  0,   0,   0)
@@ -32,21 +33,22 @@ GREEN     = (  0, 255,   0)
 DARKGREEN = (  0, 155,   0)
 DARKGRAY  = ( 40,  40,  40)
 BGCOLOR = BLACK
-##
 
 UP = 'up'
 DOWN = 'down'
 LEFT = 'left'
 RIGHT = 'right'
-
+#The four lines above represent the directions and the keys the worm can take (A.S)
+#each direction is associated with the corresponding key (For example: up is associated with up) (A.S)
 HEAD = 0 # syntactic sugar: index of the worm's head
 
+##DM
 def main():
     global FPSCLOCK, DISPLAYSURF, BASICFONT
 
     pygame.init()
     FPSCLOCK = pygame.time.Clock()
-    DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT)) #A structure that keeps your game loop running at a constant FPS (RN)
+    DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     BASICFONT = pygame.font.Font('freesansbold.ttf', 18)
     pygame.display.set_caption('Wormy')
 
@@ -55,7 +57,7 @@ def main():
         runGame()
         showGameOverScreen()
 
-
+##AS
 def runGame():
     # Set a random start point.
     startx = random.randint(5, CELLWIDTH - 8)
@@ -115,14 +117,14 @@ def runGame():
         drawScore(len(wormCoords) - 3)
         pygame.display.update()
         FPSCLOCK.tick(FPS)
-
+##TD
 def drawPressKeyMsg():
     pressKeySurf = BASICFONT.render('Press a key to play.', True, DARKGRAY)
     pressKeyRect = pressKeySurf.get_rect()
     pressKeyRect.topleft = (WINDOWWIDTH - 200, WINDOWHEIGHT - 30)
     DISPLAYSURF.blit(pressKeySurf, pressKeyRect)
 
-
+##TD
 def checkForKeyPress():
     if len(pygame.event.get(QUIT)) > 0:
         terminate()
@@ -134,7 +136,7 @@ def checkForKeyPress():
         terminate()
     return keyUpEvents[0].key
 
-
+#RN
 def showStartScreen():
     titleFont = pygame.font.Font('freesansbold.ttf', 100)
     titleSurf1 = titleFont.render('Wormy!', True, WHITE, DARKGREEN)
@@ -164,16 +166,16 @@ def showStartScreen():
         degrees1 += 3 # rotate by 3 degrees each frame
         degrees2 += 7 # rotate by 7 degrees each frame
 
-
+#AS
 def terminate():
     pygame.quit()
     sys.exit()
 
-
+##DM
 def getRandomLocation():
     return {'x': random.randint(0, CELLWIDTH - 1), 'y': random.randint(0, CELLHEIGHT - 1)}
 
-
+#TD
 def showGameOverScreen():
     gameOverFont = pygame.font.Font('freesansbold.ttf', 150)
     gameSurf = gameOverFont.render('Game', True, WHITE)
@@ -194,15 +196,14 @@ def showGameOverScreen():
         if checkForKeyPress():
             pygame.event.get() # clear event queue
             return
-
-#This function creates the score and puts it at the top right of the screen (Comes from WINDOWWIDTH-120,10)-DM
+#RN
 def drawScore(score):
     scoreSurf = BASICFONT.render('Score: %s' % (score), True, WHITE)
     scoreRect = scoreSurf.get_rect()
     scoreRect.topleft = (WINDOWWIDTH - 120, 10)
     DISPLAYSURF.blit(scoreSurf, scoreRect)
 
-#This function creates the worm and plots it into the game-DM
+#DM
 def drawWorm(wormCoords):
     for coord in wormCoords:
         x = coord['x'] * CELLSIZE
@@ -212,14 +213,14 @@ def drawWorm(wormCoords):
         wormInnerSegmentRect = pygame.Rect(x + 4, y + 4, CELLSIZE - 8, CELLSIZE - 8)
         pygame.draw.rect(DISPLAYSURF, GREEN, wormInnerSegmentRect)
 
-#this function creates the apple and plots it into the game at a certain x and y value-DM
+#DM
 def drawApple(coord):
     x = coord['x'] * CELLSIZE
     y = coord['y'] * CELLSIZE
     appleRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)
     pygame.draw.rect(DISPLAYSURF, RED, appleRect)
 
-#This function draws the game grid-DM
+#TD
 def drawGrid():
     for x in range(0, WINDOWWIDTH, CELLSIZE): # draw vertical lines
         pygame.draw.line(DISPLAYSURF, DARKGRAY, (x, 0), (x, WINDOWHEIGHT))
@@ -229,3 +230,4 @@ def drawGrid():
 
 if __name__ == '__main__':
     main()
+#Runs the game
