@@ -211,7 +211,7 @@ def showGameOverScreen():
 
     gameOverFont = pygame.font.Font('freesansbold.ttf', 150)
     
-    #
+    #this here refers our code to 
     
     gameSurf = gameOverFont.render('Game', True, WHITE)
     
@@ -223,19 +223,19 @@ def showGameOverScreen():
     
     gameRect = gameSurf.get_rect()
     
-    #
+    # Defining our variables which display our message 'Game' -TD
     
     overRect = overSurf.get_rect()
     
-    #
+    #Defining our variables which displays our 'over' message. refering to our  -TD
     
     gameRect.midtop = (WINDOWWIDTH / 2, 10)
     
-    #Positioning of our 
+    #Positioning of such variables location within our window, this one being 'Game' -TD
     
     overRect.midtop = (WINDOWWIDTH / 2, gameRect.height + 10 + 25)
     
-#
+     #Positioning of such variables location within our window in this example 'Over' -TD
     
     DISPLAYSURF.blit(gameSurf, gameRect)
     
