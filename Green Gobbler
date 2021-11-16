@@ -135,9 +135,9 @@ def runGame():
         FPSCLOCK.tick(FPS)
 ##TD
 def drawPressKeyMsg():
-#
+#This function represents our message within the menu screen -TD
     pressKeySurf = BASICFONT.render('Press a key to play.', True, DARKGRAY)
-    #
+    #Generates Text in which we wish to display as well as the colour previously defined it will be -TD
     pressKeyRect = pressKeySurf.get_rect()
     #
     pressKeyRect.topleft = (WINDOWWIDTH - 200, WINDOWHEIGHT - 30)
@@ -151,7 +151,7 @@ def checkForKeyPress():
     if len(pygame.event.get(QUIT)) > 0:
     #
         terminate()
-        #
+        #This will end our program in turn closing the game -TD
 
     keyUpEvents = pygame.event.get(KEYUP)
     #
@@ -206,40 +206,71 @@ def getRandomLocation():
 
 #TD
 def showGameOverScreen():
-#
+
+#Function in which is called when the figure of the game hits a boundry showing a message to idicate to the user the game is over -TD
+
     gameOverFont = pygame.font.Font('freesansbold.ttf', 150)
+    
     #
+    
     gameSurf = gameOverFont.render('Game', True, WHITE)
+    
     #
+    
     overSurf = gameOverFont.render('Over', True, WHITE)
+    
     #
+    
     gameRect = gameSurf.get_rect()
+    
     #
+    
     overRect = overSurf.get_rect()
+    
     #
+    
     gameRect.midtop = (WINDOWWIDTH / 2, 10)
-    #
+    
+    #Positioning of our 
+    
     overRect.midtop = (WINDOWWIDTH / 2, gameRect.height + 10 + 25)
+    
 #
     
     DISPLAYSURF.blit(gameSurf, gameRect)
+    
     #
+    
     DISPLAYSURF.blit(overSurf, overRect)
+    
     #
+    
     drawPressKeyMsg()
+    
     #
+    
     pygame.display.update()
+    
     #
+    
     pygame.time.wait(500)
+    
     #
+    
     checkForKeyPress() # clear out any key presses in the event queue
 
     while True:
+    
     #
+    
         if checkForKeyPress():
+        
         #
+        
             pygame.event.get() 
-            # clear event queue
+            
+            # clears our event queue within our function
+            
             return
 #RN
 def drawScore(score):
