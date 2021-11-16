@@ -37,7 +37,8 @@ UP = 'up'
 DOWN = 'down'
 LEFT = 'left'
 RIGHT = 'right'
-
+#The four lines above represent the directions and the keys the worm can take (A.S)
+#each direction is associated with the corresponding key (For example: up is associated with up) (A.S)
 HEAD = 0 # syntactic sugar: index of the worm's head
 
 def main():
