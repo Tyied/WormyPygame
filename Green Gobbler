@@ -6,8 +6,8 @@
 import random, pygame, sys
 from pygame.locals import *
 
-FPS = 10
-
+FPS = 20
+#FPS is the frames per second so increasing the overall 
 WINDOWWIDTH = 1800
 
 WINDOWHEIGHT = 1000
