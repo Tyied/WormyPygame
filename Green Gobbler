@@ -6,14 +6,14 @@
 import random, pygame, sys
 from pygame.locals import *
 
-FPS = 15
+FPS = 20
 #FPS is the frames per second so increasing the overall 
 WINDOWWIDTH = 1800
-
+#how wide the game window is-DM
 WINDOWHEIGHT = 1000
-
+#how tall the game window is-DM
 CELLSIZE = 20
-#cellsize accounts to the quantity of surface area of the cells(A.S)
+
 
 assert WINDOWWIDTH % CELLSIZE == 0, "Window width must be a multiple of cell size."
 
@@ -23,7 +23,7 @@ CELLWIDTH = int(WINDOWWIDTH / CELLSIZE)
 
 CELLHEIGHT = int(WINDOWHEIGHT / CELLSIZE)
 
-
+#This entire section is to initialize colours that can be referenced later on-DM
 #             R    G    B
 WHITE     = (255, 255, 255)
 BLACK     = (  0,   0,   0)
