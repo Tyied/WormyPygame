@@ -9,9 +9,9 @@ from pygame.locals import *
 FPS = 20
 #FPS is the frames per second so increasing the overall 
 WINDOWWIDTH = 1800
-
+#how wide the game window is
 WINDOWHEIGHT = 1000
-
+#how tall the game window is
 CELLSIZE = 20
 
 
