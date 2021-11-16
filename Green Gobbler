@@ -13,7 +13,7 @@ WINDOWWIDTH = 1800
 WINDOWHEIGHT = 1000
 #how tall the game window is-DM
 CELLSIZE = 20
-
+#this accounts to the quantity of volume or surface area per cells(cellsize) (A.S)
 
 assert WINDOWWIDTH % CELLSIZE == 0, "Window width must be a multiple of cell size."
 
