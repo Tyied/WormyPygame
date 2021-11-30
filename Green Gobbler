@@ -147,7 +147,7 @@ def drawPressKeyMsg():
 
 ##TD
 def checkForKeyPress():
-#
+# Nowdefining a Function to check that the user indeed pressed a button to start the game
     if len(pygame.event.get(QUIT)) > 0:
     #
         terminate()
@@ -211,15 +211,12 @@ def showGameOverScreen():
 
     gameOverFont = pygame.font.Font('freesansbold.ttf', 150)
     
-    #this here refers our code to 
+    #this here refers our code to a font in which our text will be displayed as -TD 
     
     gameSurf = gameOverFont.render('Game', True, WHITE)
-    
-    #
-    
     overSurf = gameOverFont.render('Over', True, WHITE)
     
-    #
+    # Both of these variables define our message and the font in which they will be printed along with the previous variable of the colour they wish to print
     
     gameRect = gameSurf.get_rect()
     
