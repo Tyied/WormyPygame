@@ -11,13 +11,13 @@
 import random, pygame, sys
 from pygame.locals import *
 
-FPS = 15
+FPS = 12
 
 #FPS is the frames per second so increasing the overall speed of our figure or eel, our title screen with rotating text -TD
-###Changed our FPS 15
+###Changed our FPS 12
 
 WINDOWWIDTH = 1200
-WINDOWHEIGHT = 800
+WINDOWHEIGHT = 600
 
 # These are the windows dimensions in which our snake, apple and functions will refer to for area in which is technically "defined" -TD
 ###Changed our Window size
