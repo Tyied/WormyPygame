@@ -43,6 +43,7 @@ BLACK     = (  0,   0,   0)
 RED       = (255,   0,   0)
 GREEN     = (  0, 255,   0)
 DARKGREEN = (  0, 155,   0)
+YELLOW    = (255, 255,   0)
 DARKGRAY  = ( 40,  40,  40)
 BGCOLOR = BLACK
 
@@ -115,6 +116,8 @@ def runGame():
             apple = getRandomLocation() # set a new apple somewhere
         else:
             del wormCoords[-1] # remove worm's tail segment
+        if wormCoords[HEAD]['x'] == obs['x'] and wormCoords[HEAD]['y'] == obs['y']:
+            return # game over
 
         # move the worm by adding a segment in the direction it is moving
         if direction == UP:
@@ -130,6 +133,7 @@ def runGame():
         drawGrid()
         drawWorm(wormCoords)
         drawApple(apple)
+        drawObstacle(obs)
         drawScore(len(wormCoords) - 3)
         pygame.display.update()
         FPSCLOCK.tick(FPS)
@@ -292,6 +296,12 @@ def drawApple(coord):
     y = coord['y'] * CELLSIZE
     appleRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)
     pygame.draw.rect(DISPLAYSURF, RED, appleRect)
+    
+def drawObstacle(coord):
+    x = coord['x'] * CELLSIZE
+    y = coord['y'] * CELLSIZE
+    obsRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)
+    pygame.draw.rect(DISPLAYSURF, YELLOW, obsRect)
 
 #TD
 def drawGrid():
