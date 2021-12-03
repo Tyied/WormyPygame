@@ -86,6 +86,7 @@ def runGame():
 
     # Start the apple in a random place.
     apple = getRandomLocation()
+    obs = getRandomLocation()
 
     while True: # main game loop
         for event in pygame.event.get(): # event handling loop
