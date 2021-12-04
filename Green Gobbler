@@ -77,46 +77,46 @@ def main():
 ##AS
 def runGame():
     # Set a random start point.
-    startx = random.randint(5, CELLWIDTH - 8)
+    startx = random.randint(5, CELLWIDTH - 8) ##startx and starty indicate the x and y cordinates of where the worm will start the game from.
     starty = random.randint(5, CELLHEIGHT - 8)
     wormCoords = [{'x': startx,     'y': starty},
-                  {'x': startx - 1, 'y': starty},
+                  {'x': startx - 1, 'y': starty}, ##these three lines of code demonstrate the starting position of the game relaitve to the start time of the game
                   {'x': startx - 2, 'y': starty}]
     direction = RIGHT
 
     # Start the apple in a random place.
-    apple = getRandomLocation()
-    obs = getRandomLocation()
+    apple = getRandomLocation() ##this linm gets a random place for the apple with regards to the x-coordinate
+    obs = getRandomLocation() ##this line gets a random place of the apple with regards to the y-coordinate.
 
-    while True: # main game loop
+    while True: # main game loop ##this while loops indicates that if the game starts do the following:
         for event in pygame.event.get(): # event handling loop
-            if event.type == QUIT:
+            if event.type == QUIT: ##This command indiactes that if the player chooses quit that the terminal will be terminated.
                 terminate()
-            elif event.type == KEYDOWN:
+            elif event.type == KEYDOWN:  ##This is an elif statement regarding if a key is pressed go through the following codes ##These three lines assign the left key to the direction left, by writing if the drection doesn't equal right then it equals left
                 if (event.key == K_LEFT or event.key == K_a) and direction != RIGHT:
                     direction = LEFT
-                elif (event.key == K_RIGHT or event.key == K_d) and direction != LEFT:
+                elif (event.key == K_RIGHT or event.key == K_d) and direction != LEFT: ##The two lines indiacte that if the right key is pressed down and the direction doesn't equal left then the direction is to the right (worm moves to the right)
                     direction = RIGHT
-                elif (event.key == K_UP or event.key == K_w) and direction != DOWN:
+                elif (event.key == K_UP or event.key == K_w) and direction != DOWN: ##The two lines indicate that if the up key is clicked and the directn doesn't equal down, then the direction of the worm is up.
                     direction = UP
-                elif (event.key == K_DOWN or event.key == K_s) and direction != UP:
+                elif (event.key == K_DOWN or event.key == K_s) and direction != UP: ##The two lines indicate that if the down button is clicked and the direction doesn't equal up then the direction of the snake is down.
                     direction = DOWN
-                elif event.key == K_ESCAPE:
+                elif event.key == K_ESCAPE: ##These two lines indicate that if the escape button is clicked the the game must be clicked (terminated)
                     terminate()
 
         # check if the worm has hit itself or the edge
         if wormCoords[HEAD]['x'] == -1 or wormCoords[HEAD]['x'] == CELLWIDTH or wormCoords[HEAD]['y'] == -1 or wormCoords[HEAD]['y'] == CELLHEIGHT:
-            return # game over
+            return # game over ##The line above and below checks the position of the worm relative to the boundries, returning game over if the position of the worm matches the dimensions of the boundries
         for wormBody in wormCoords[1:]:
             if wormBody['x'] == wormCoords[HEAD]['x'] and wormBody['y'] == wormCoords[HEAD]['y']:
                 return # game over
 
-        # check if worm has eaten an apply
-        if wormCoords[HEAD]['x'] == apple['x'] and wormCoords[HEAD]['y'] == apple['y']:
+        # check if worm has eaten an apple
+        if wormCoords[HEAD]['x'] == apple['x'] and wormCoords[HEAD]['y'] == apple['y']: ##This line indicates that if the poistion of the worm's head equals the position of the apple in the x and y coordinates then dont rem0ve the tail
             # don't remove worm's tail segment
-            apple = getRandomLocation() # set a new apple somewhere
+            apple = getRandomLocation() # set a new apple somewhere ##This line sets a new location for the apple at a random position
         else:
-            del wormCoords[-1] # remove worm's tail segment
+            del wormCoords[-1] # remove worm's tail segment ##These three lines removes the tail of the worm if the x and y values are equal
         if wormCoords[HEAD]['x'] == obs['x'] and wormCoords[HEAD]['y'] == obs['y']:
             return # game over
 
@@ -201,7 +201,7 @@ def showStartScreen():
         degrees2 += 7 # rotate by 7 degrees each frame
 
 #AS
-def terminate():
+def terminate(): ##these lines of codes quee all comands used to exit. 
     pygame.quit()
     sys.exit()
 
