@@ -47,7 +47,7 @@ YELLOW    = (255, 255,   0)
 DARKGRAY  = ( 40,  40,  40)
 BGCOLOR = BLACK
 
-#This entire section is to initialize colours that can be referenced later on -DM
+#This entire section is to initialize colours that can be referenced later on -RN
 
 UP = 'up'
 DOWN = 'down'
@@ -64,8 +64,8 @@ def main():
     global FPSCLOCK, DISPLAYSURF, BASICFONT
 
     pygame.init()
-    FPSCLOCK = pygame.time.Clock()
-    DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
+    FPSCLOCK = pygame.time.Clock() #this is used to create a clock object which can be used to keep track of time - DM
+    DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT)) #this will create a display surface - DM
     BASICFONT = pygame.font.Font('freesansbold.ttf', 18)
     pygame.display.set_caption('Wormy')
 
