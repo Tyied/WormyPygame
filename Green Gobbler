@@ -369,4 +369,4 @@ def drawGrid():
 
 if __name__ == '__main__':
     main()
-#Runs the game -TD
+#Runs the module -TD
