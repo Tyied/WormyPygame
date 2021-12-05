@@ -1,7 +1,25 @@
-#RN- Raymond Ni
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+This is a temporary script file.
+"""
+#RN - Raymond Ni
 #DM- Daniel Mikoluk
 #TD- Ty Davis
 #AS-Ali Soliman
+
+##########################################
+#   OVERALL CHANGES DONE                 #
+#   Added PINK and YELLOW                #
+# FPS, Window Size, Cell Size            #
+# Bad Apples (all associated functions)  #
+# Obstacles (all associated functions)   #
+# Title Screen, Score
+#
+#
+#
+##############################
 
 # Wormy (a Nibbles clone)
 # By Al Sweigart al@inventwithpython.com
@@ -85,14 +103,16 @@ def runGame():
                   {'x': startx - 2, 'y': starty}]
     direction = RIGHT
 
-    # Start the apple in a random place.
-    apple = getRandomLocation() ##this line gets a random place for the apple with regards to the x-coordinate
-    obs = getRandomLocation() ##this line gets a random place of the apple with regards to the x-coordinate.
+##############################################
+# Starts the in game objects in a random place.
+    apple = getRandomLocation() 
+    obs = getRandomLocation() 
     obs2 = getRandomLocation()
     obs3 = getRandomLocation()
-    Bapple = getRandomLocation() ##this line gets a random place of the Bad apple with regards to the x-coordinate.
+    Bapple = getRandomLocation() 
     Bapple2 = getRandomLocation()
     Bapple3 = getRandomLocation()
+##############################################
     while True: # main game loop ##this while loops indicates that if the game starts do the following:
         for event in pygame.event.get(): # event handling loop
             if event.type == QUIT: ##This command indiactes that if the player chooses quit that the terminal will be terminated.
@@ -144,6 +164,8 @@ def runGame():
         elif direction == RIGHT:
             newHead = {'x': wormCoords[HEAD]['x'] + 1, 'y': wormCoords[HEAD]['y']}
         wormCoords.insert(0, newHead)
+       #############################################################
+       #All Functions below are being called within the main branch#
         DISPLAYSURF.fill(BGCOLOR)
         drawGrid()
         drawWorm(wormCoords)
@@ -157,35 +179,44 @@ def runGame():
         drawScore(len(wormCoords) - 3)
         pygame.display.update()
         FPSCLOCK.tick(FPS)
+        ############################################################
 ##TD
 def drawPressKeyMsg():
-#This function represents our message within the menu screen -TD
+#This function represents our message to prompt our user to press a key leading them to restart the game and try again
+
     pressKeySurf = BASICFONT.render('Press a key to play.', True, DARKGRAY)
-    #Generates Text in which we wish to display as well as the colour previously defined it will be -TD
+    #Generates Text in which we wish to display with the colour and font being previously defined
+    
     pressKeyRect = pressKeySurf.get_rect()
-    #this is calling our defined render of text along with a get_rect which will add a rectangle -TD
+    #this is calling our defined render of text along with a get_rect which will add a rectangle 
+    
     pressKeyRect.topleft = (WINDOWWIDTH - 200, WINDOWHEIGHT - 30)
-    #Now defining the location in which we would like it and assigning a new variable -TD
+    #Now defining the location in which we would like it and assigning our new variable within our window
+    
     DISPLAYSURF.blit(pressKeySurf, pressKeyRect)
-    #
+    #now compiling the 2 variables we have on our display surface 
 
 ##TD
 def checkForKeyPress():
-# Now defining a Function to check that the user indeed pressed a button to start the game
+# Now defining a Function to check that the user indeed pressed a button to start the game 
+
     if len(pygame.event.get(QUIT)) > 0:
     #if the length of our 
+    
         terminate()
-        #This will end our program in turn closing the game -TD
+        #This will end our program in turn closing the game 
 
     keyUpEvents = pygame.event.get(KEYUP)
-    #
+    #defining a new variable to represent the actions of pressing a key 
+    
     if len(keyUpEvents) == 0:
-    #
+    #checking to see if our length is zero meaning nothing has changed then we must return none 
         return None
+    
     if keyUpEvents[0].key == K_ESCAPE:
-    #
+    #This will check to see if such key pressed is the same as the previously defined K_ESCAPE variable which is associated with the actual escape button which will now tell the program to terminate if such statement returns true 
         terminate()
-        #
+        #This will end our program in turn closing the game 
     return keyUpEvents[0].key
     
 
@@ -231,69 +262,53 @@ def getRandomLocation():#This function returns a random x and y location when ca
 
 #TD
 def showGameOverScreen():
-
-#Function in which is called when the figure of the game hits a boundry showing a message to idicate to the user the game is over -TD
+#Function in which is called when the figure of the game hits a boundry showing a message to idicate to the user the game is over
 
     gameOverFont = pygame.font.Font('freesansbold.ttf', 150)
-    
-    #this here refers our code to a font in which our text will be displayed as -TD 
+    #this here refers our code to a font in which our text will be displayed as 
     
     gameSurf = gameOverFont.render('Game', True, WHITE)
     overSurf = gameOverFont.render('Over', True, WHITE)
-    
-    # Both of these variables define our message and the font in which they will be printed along with the previous variable of the colour they wish to print
+    # Both of these variables define our message and the font in which they will be printed along with the previous variable of the colour
     
     gameRect = gameSurf.get_rect()
-    
-    # Defining our variables which display our message 'Game' -TD
+    # Defining our variables which display our message 'Game' 
     
     overRect = overSurf.get_rect()
-    
-    #Defining our variables which displays our 'over' message. refering to our  -TD
+    #Defining our variables which displays our 'over' message. refering to the codes defined shape of the layout of our message
     
     gameRect.midtop = (WINDOWWIDTH / 2, 10)
-    
-    #Positioning of such variables location within our window, this one being 'Game' -TD
+    #Positioning of such variables location within our window, this one being 'Game' 
     
     overRect.midtop = (WINDOWWIDTH / 2, gameRect.height + 10 + 25)
-    
-     #Positioning of such variables location within our window in this example 'Over' -TD
+     #Positioning of such variables location within our window in this example 'Over' 
     
     DISPLAYSURF.blit(gameSurf, gameRect)
-    
-    #
-    
     DISPLAYSURF.blit(overSurf, overRect)
-    
-    #
+    #Both above will now display our final product onto the window of the game for our player to see 
     
     drawPressKeyMsg()
-    
-    #
+    #Calling our previously defined function which will prompt the user to press another key to continue playing
     
     pygame.display.update()
-    
-    #
+    #this as very clearly indicated will update our display with the new following information given (keys,terminate ect.)
     
     pygame.time.wait(500)
+    #this is a built in function to tell our code to pause for x time in milliseconds in our case 500
     
-    #
+    checkForKeyPress() 
+    # clear out any key presses in the event queue
     
-    checkForKeyPress() # clear out any key presses in the event queue
-
     while True:
-    
-    #
+    # Starting a continues loop for our Gameover screen
     
         if checkForKeyPress():
-        
-        #
+        #this will continuously check for our user to input a new value or new action as without such we remain in the gameover screen until prompted to play again or close such program
         
             pygame.event.get() 
-            
-            # clears our event queue within our function
-            
+            #clears our event queue within our function
             return
+        
 #RN
 def drawScore(score):
     scoreSurf = BASICFONT.render('Score: %s' % (score), True, PINK)## changed score font color from white to PINK - RN
@@ -320,10 +335,17 @@ def drawApple(coord):#This function draws the good apple on the screen
 
 #TD
 def drawObstacle(coord):
-    x = coord['x'] * CELLSIZE
-    y = coord['y'] * CELLSIZE
-    obsRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)
+    #This function draws the obstacle on the screen
+    
+    x = coord['x'] * CELLSIZE 
+    y = coord['y'] * CELLSIZE 
+    #Both assign our x and y of the Obstacle as they are remaining defined within this function and not outside
+    
+    obsRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE) 
+    #assignes the obstacle a bunch of values for the grid with position and shape
+    
     pygame.draw.rect(DISPLAYSURF, DARKGRAY, obsRect)
+    #These will place the actual obstacle on the grid along with its colour
 
 #DM    
 def drawBadApple(coord):#This function draws the bad apple on the screen
@@ -334,15 +356,15 @@ def drawBadApple(coord):#This function draws the bad apple on the screen
     
 #TD
 def drawGrid():
-#
-    for x in range(0, WINDOWWIDTH, CELLSIZE): # draw vertical lines
-    #
+#Basic function to show the player a distinct set of lines otherwise not indicated of our interpreted grid in the code
+
+    for x in range(0, WINDOWWIDTH, CELLSIZE): 
         pygame.draw.line(DISPLAYSURF, DARKGRAY, (x, 0), (x, WINDOWHEIGHT))
-        #
-    for y in range(0, WINDOWHEIGHT, CELLSIZE): # draw horizontal lines
-    #
+     # Makes a for loop to draw draw vertical lines for each x value within our window
+     
+    for y in range(0, WINDOWHEIGHT, CELLSIZE): 
         pygame.draw.line(DISPLAYSURF, DARKGRAY, (0, y), (WINDOWWIDTH, y))
-        #
+     # Makes a for loop to draw draw horizontal lines for each y value within our window
 
 
 if __name__ == '__main__':
