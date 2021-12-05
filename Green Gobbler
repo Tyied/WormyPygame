@@ -61,18 +61,18 @@ HEAD = 0 # syntactic sugar: index of the worm's head
 
 ##DM
 def main():
-    global FPSCLOCK, DISPLAYSURF, BASICFONT
+    global FPSCLOCK, DISPLAYSURF, BASICFONT #This is just starting the game and setting the basic values 
 
     pygame.init()
-    FPSCLOCK = pygame.time.Clock() #this is used to create a clock object which can be used to keep track of time - DM
-    DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT)) #this will create a display surface - DM
-    BASICFONT = pygame.font.Font('freesansbold.ttf', 18)
-    pygame.display.set_caption('Wormy')
+    FPSCLOCK = pygame.time.Clock() #this is used to create a clock object which can be used to keep track of time
+    DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT)) #this will create a display surface
+    BASICFONT = pygame.font.Font('freesansbold.ttf', 18)#setting the font to freesansbold font size 18
+    pygame.display.set_caption('Wormy')#Display the word wormy in the beginning screen
 
-    showStartScreen()
-    while True:
-        runGame()
-        showGameOverScreen()
+    showStartScreen()#show the beginning screen
+    while True:#while the game has not been shut down
+        runGame()#run the game
+        showGameOverScreen()#if run game is finished, show the game over screen
 
 ##AS
 def runGame():
@@ -86,8 +86,12 @@ def runGame():
 
     # Start the apple in a random place.
     apple = getRandomLocation() ##this linm gets a random place for the apple with regards to the x-coordinate
-    obs = getRandomLocation() ##this line gets a random place of the apple with regards to the y-coordinate.
-
+    obs = getRandomLocation() ##this line gets a random place of the apple with regards to the x-coordinate.
+    obs2 = getRandomLocation()
+    obs3 = getRandomLocation()
+    Bapple = getRandomLocation() ##this line gets a random place of the Bad apple with regards to the x-coordinate.
+    Bapple2 = getRandomLocation()
+    Bapple3 = getRandomLocation()
     while True: # main game loop ##this while loops indicates that if the game starts do the following:
         for event in pygame.event.get(): # event handling loop
             if event.type == QUIT: ##This command indiactes that if the player chooses quit that the terminal will be terminated.
@@ -115,9 +119,18 @@ def runGame():
         if wormCoords[HEAD]['x'] == apple['x'] and wormCoords[HEAD]['y'] == apple['y']: ##This line indicates that if the poistion of the worm's head equals the position of the apple in the x and y coordinates then dont rem0ve the tail
             # don't remove worm's tail segment
             apple = getRandomLocation() # set a new apple somewhere ##This line sets a new location for the apple at a random position
+                
+        elif (wormCoords[HEAD]['x'] == Bapple['x'] and wormCoords[HEAD]['y'] == Bapple['y']) or (wormCoords[HEAD]['x'] == Bapple2['x'] and wormCoords[HEAD]['y'] == Bapple2['y']) or (wormCoords[HEAD]['x'] == Bapple3['x'] and wormCoords[HEAD]['y'] == Bapple3['y']):
+             del wormCoords[-1]
+             if len(wormCoords)==1:
+                 return #game over
+             del wormCoords[-2]
+             Bapple = getRandomLocation()
+             Bapple2 = getRandomLocation()
+             Bapple3 = getRandomLocation()
         else:
             del wormCoords[-1] # remove worm's tail segment ##These three lines removes the tail of the worm if the x and y values are equal
-        if wormCoords[HEAD]['x'] == obs['x'] and wormCoords[HEAD]['y'] == obs['y']:
+        if (wormCoords[HEAD]['x'] == obs['x'] and wormCoords[HEAD]['y'] == obs['y']) or (wormCoords[HEAD]['x'] == obs2['x'] and wormCoords[HEAD]['y'] == obs2['y']) or (wormCoords[HEAD]['x'] == obs3['x'] and wormCoords[HEAD]['y'] == obs3['y']):
             return # game over
 
         # move the worm by adding a segment in the direction it is moving
@@ -135,6 +148,11 @@ def runGame():
         drawWorm(wormCoords)
         drawApple(apple)
         drawObstacle(obs)
+        drawObstacle(obs2)
+        drawObstacle(obs3)
+        drawBadApple(Bapple)
+        drawBadApple(Bapple2)
+        drawBadApple(Bapple3)
         drawScore(len(wormCoords) - 3)
         pygame.display.update()
         FPSCLOCK.tick(FPS)
@@ -172,9 +190,9 @@ def checkForKeyPress():
 
 #RN
 def showStartScreen():
-    titleFont = pygame.font.Font('freesansbold.ttf', 110) ##Increased the font of the title by 10 - RN
+    titleFont = pygame.font.Font('freesansbold.ttf', 100)
     titleSurf1 = titleFont.render('Wormy!', True, WHITE, DARKGREEN)
-    titleSurf2 = titleFont.render('Wormy!', True, RED, GREEN) ##Changed color of title surf from white to Red - RN
+    titleSurf2 = titleFont.render('Wormy!', True, GREEN)
 
     degrees1 = 0
     degrees2 = 0
@@ -205,8 +223,8 @@ def terminate(): ##these lines of codes quee all comands used to exit.
     pygame.quit()
     sys.exit()
 
-##DM
-def getRandomLocation():
+#DM
+def getRandomLocation():#This function returns a random x and y location when called
     return {'x': random.randint(0, CELLWIDTH - 1), 'y': random.randint(0, CELLHEIGHT - 1)}
 
 #TD
@@ -282,28 +300,36 @@ def drawScore(score):
     DISPLAYSURF.blit(scoreSurf, scoreRect)
 
 #DM
-def drawWorm(wormCoords):
-    for coord in wormCoords:
-        x = coord['x'] * CELLSIZE
-        y = coord['y'] * CELLSIZE
-        wormSegmentRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)
-        pygame.draw.rect(DISPLAYSURF, DARKGREEN, wormSegmentRect)
+def drawWorm(wormCoords):#This function draws the worm
+    for coord in wormCoords:#For each section of the worm
+        x = coord['x'] * CELLSIZE#Give it an x value
+        y = coord['y'] * CELLSIZE#Give it a y value
+        wormSegmentRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)#draw the actual worm in the game
+        pygame.draw.rect(DISPLAYSURF, DARKGREEN, wormSegmentRect)#
         wormInnerSegmentRect = pygame.Rect(x + 4, y + 4, CELLSIZE - 8, CELLSIZE - 8)
         pygame.draw.rect(DISPLAYSURF, GREEN, wormInnerSegmentRect)
 
 #DM
-def drawApple(coord):
-    x = coord['x'] * CELLSIZE
-    y = coord['y'] * CELLSIZE
-    appleRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)
-    pygame.draw.rect(DISPLAYSURF, RED, appleRect)
-    
+def drawApple(coord):#This function draws the good apple on the screen
+    x = coord['x'] * CELLSIZE#Give it an x value
+    y = coord['y'] * CELLSIZE#Give it a y value
+    appleRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)#draw the apple
+    pygame.draw.rect(DISPLAYSURF, RED, appleRect)#draw the apple in the game with the colour and stuff
+
+#TD
 def drawObstacle(coord):
     x = coord['x'] * CELLSIZE
     y = coord['y'] * CELLSIZE
     obsRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)
-    pygame.draw.rect(DISPLAYSURF, YELLOW, obsRect)
+    pygame.draw.rect(DISPLAYSURF, DARKGRAY, obsRect)
 
+#DM    
+def drawBadApple(coord):#This function draws the bad apple on the screen
+    x = coord['x'] * CELLSIZE#Give it an x value
+    y = coord['y'] * CELLSIZE#Give it a y value
+    BappleRect = pygame.Rect(x, y, CELLSIZE, CELLSIZE)#draw the bad apple
+    pygame.draw.rect(DISPLAYSURF, YELLOW, BappleRect)#draw the bad apple in the game with the colour
+    
 #TD
 def drawGrid():
 #
