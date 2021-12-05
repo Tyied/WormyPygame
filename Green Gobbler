@@ -49,7 +49,7 @@ PINK      = (255, 153, 255)
 BGCOLOR = BLACK
 
 #This entire section is to initialize colours that can be referenced later on -RN
-
+###Added Yellow and Pink
 UP = 'up'
 DOWN = 'down'
 LEFT = 'left'
@@ -86,7 +86,7 @@ def runGame():
     direction = RIGHT
 
     # Start the apple in a random place.
-    apple = getRandomLocation() ##this linm gets a random place for the apple with regards to the x-coordinate
+    apple = getRandomLocation() ##this line gets a random place for the apple with regards to the x-coordinate
     obs = getRandomLocation() ##this line gets a random place of the apple with regards to the x-coordinate.
     obs2 = getRandomLocation()
     obs3 = getRandomLocation()
@@ -163,17 +163,17 @@ def drawPressKeyMsg():
     pressKeySurf = BASICFONT.render('Press a key to play.', True, DARKGRAY)
     #Generates Text in which we wish to display as well as the colour previously defined it will be -TD
     pressKeyRect = pressKeySurf.get_rect()
-    #
+    #this is calling our defined render of text along with a get_rect which will add a rectangle -TD
     pressKeyRect.topleft = (WINDOWWIDTH - 200, WINDOWHEIGHT - 30)
-    #
+    #Now defining the location in which we would like it and assigning a new variable -TD
     DISPLAYSURF.blit(pressKeySurf, pressKeyRect)
     #
 
 ##TD
 def checkForKeyPress():
-# Nowdefining a Function to check that the user indeed pressed a button to start the game
+# Now defining a Function to check that the user indeed pressed a button to start the game
     if len(pygame.event.get(QUIT)) > 0:
-    #
+    #if the length of our 
         terminate()
         #This will end our program in turn closing the game -TD
 
@@ -187,7 +187,7 @@ def checkForKeyPress():
         terminate()
         #
     return keyUpEvents[0].key
-    #
+    
 
 #RN
 def showStartScreen():
@@ -221,7 +221,7 @@ def showStartScreen():
         degrees2 += 7 # rotate by 7 degrees each frame
 
 #AS
-def terminate(): ##these lines of codes quee all comands used to exit. 
+def terminate(): ##these lines of codes queue all comands used to exit. 
     pygame.quit()
     sys.exit()
 
