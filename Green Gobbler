@@ -45,6 +45,7 @@ GREEN     = (  0, 255,   0)
 DARKGREEN = (  0, 155,   0)
 YELLOW    = (255, 255,   0)
 DARKGRAY  = ( 40,  40,  40)
+PINK      = (255, 153, 255)
 BGCOLOR = BLACK
 
 #This entire section is to initialize colours that can be referenced later on -RN
@@ -213,7 +214,8 @@ def showStartScreen():
         if checkForKeyPress():
             pygame.event.get() # clear event queue
             return
-        pygame.display.update()
+        #this function queries the player to press any button to start the game - RN
+        pygame.display.update() # this updates the display of the game from title screen to game screen - RN
         FPSCLOCK.tick(FPS)
         degrees1 += 3 # rotate by 3 degrees each frame
         degrees2 += 7 # rotate by 7 degrees each frame
@@ -294,9 +296,9 @@ def showGameOverScreen():
             return
 #RN
 def drawScore(score):
-    scoreSurf = BASICFONT.render('Score: %s' % (score), True, WHITE)
+    scoreSurf = BASICFONT.render('Score: %s' % (score), True, PINK)## changed score font color from white to PINK - RN
     scoreRect = scoreSurf.get_rect()
-    scoreRect.topleft = (WINDOWWIDTH - 120, 10)
+    scoreRect.topleft = (WINDOWWIDTH - 120, 10) # positions the scoreboard at the top left side of the screen
     DISPLAYSURF.blit(scoreSurf, scoreRect)
 
 #DM
