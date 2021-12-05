@@ -190,12 +190,12 @@ def checkForKeyPress():
 
 #RN
 def showStartScreen():
-    titleFont = pygame.font.Font('freesansbold.ttf', 100)
+    titleFont = pygame.font.Font('freesansbold.ttf', 110) ##Increased the font of the title by 10 - RN
     titleSurf1 = titleFont.render('Wormy!', True, WHITE, DARKGREEN)
-    titleSurf2 = titleFont.render('Wormy!', True, GREEN)
+    titleSurf2 = titleFont.render('Wormy!', True, GREEN, RED) ##Added a color RED to the title surf.
 
-    degrees1 = 0
-    degrees2 = 0
+    degrees1 = 90 ## Change the angle at which the title surf rotates from 0 to 90
+    degrees2 = 90 ## Change the angle at which the title surf rotates from 0 to 90
     while True:
         DISPLAYSURF.fill(BGCOLOR)
         rotatedSurf1 = pygame.transform.rotate(titleSurf1, degrees1)
