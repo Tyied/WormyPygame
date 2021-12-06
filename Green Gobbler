@@ -132,6 +132,7 @@ def runGame():
             return # game over ##The line above and below checks the position of the worm relative to the boundries, returning game over if the position of the worm matches the dimensions of the boundries
         for wormBody in wormCoords[1:]:
             if wormBody['x'] == wormCoords[HEAD]['x'] and wormBody['y'] == wormCoords[HEAD]['y']:
+                Death.play()
                 return # game over
 
         # check if worm has eaten an apple
